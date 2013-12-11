@@ -11,12 +11,12 @@ using System.Diagnostics;
 
 namespace Bell
 {
-	class ClockModel
+	class ClockModel : INotifyPropertyChanged
 	{
 
 		#region Fields
 		private int h = 0;
-		private string _timetext;
+		string timetext;
 		private string _err;
 		private DateTime _now;
 		public KeyValuePair<int,TimeSpan>[] list;
@@ -26,15 +26,6 @@ namespace Bell
 		#endregion
 
 		#region Properties
-		public String TimeText
-		{
-			get { return _timetext; }
-			set
-			{
-				_timetext = value;
-				NotifyPropertyChanged("TimeText");
-			}
-		}
 
 		public string time_type{
 			get {
@@ -76,8 +67,8 @@ namespace Bell
 			{
 				if(h < (list.Length - 1)){
 				h = value;
-				NotifyPropertyChanged("time_type");
-				NotifyPropertyChanged("next_hour");
+//				NotifyPropertyChanged("time_type");
+//				NotifyPropertyChanged("next_hour");
 				}
 			}
 		}	
@@ -95,7 +86,7 @@ namespace Bell
 			set
 			{
 				_err = value;
-				NotifyPropertyChanged("Error");
+//				NotifyPropertyChanged("Error");
 			}
 		}
 
@@ -106,7 +97,8 @@ namespace Bell
 			set
 			{
 				_now = value;
-				TimeText = value.ToString("HH:mm:ss");
+				timetext = value.ToString("HH:mm:ss");
+				
 
 			}
 		}
@@ -210,6 +202,19 @@ namespace Bell
 			
 		}
 
+		#region PropertyChanged
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		private void NotifyPropertyChanged(string str)
+		{
+			if (PropertyChanged != null)
+			{
+				PropertyChanged(this, new PropertyChangedEventArgs(str));
+			}
+		}
+
+		#endregion
 		
 	}
 }

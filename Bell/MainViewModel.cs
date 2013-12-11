@@ -10,7 +10,22 @@ namespace Bell
 	class MainViewModel : INotifyPropertyChanged
 	{
 
+		ClockModel cm;
+		public String TimeText
+		{
+			get { return _timetext; }
+			set
+			{
+				_timetext = value;
+				NotifyPropertyChanged("TimeText");
+			}
+		}
 
+
+		public MainViewModel()
+		{
+			cm = new ClockModel();
+		}
 
 		#region PropertyChanged
 
