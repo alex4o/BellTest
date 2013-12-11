@@ -4,7 +4,7 @@
         xmlns:local="clr-namespace:Bell" x:Name="Main" x:Class="Bell.MainWindow"
         Title="BellControll" Height="350" Width="525">
 	<Window.DataContext>
-		<local:ClockModel/>
+		<local:MainViewModel/>
 	</Window.DataContext>
     <DockPanel LastChildFill="True">
         <DockPanel DockPanel.Dock="Top" Background="#FFCCCCCC">
