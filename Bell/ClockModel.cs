@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace Bell
 {
-	class ClockModel : INotifyPropertyChanged
+	class ClockModel
 	{
 
 		#region Fields
@@ -20,7 +20,7 @@ namespace Bell
 		private string _err;
 		private DateTime _now;
 		public KeyValuePair<int,TimeSpan>[] list;
-		public static SQLiteConnection con;
+//		public static SQLiteConnection con;
 		Multimedia.Timer clock;
 		int i = 0;
 		#endregion
@@ -210,18 +210,6 @@ namespace Bell
 			
 		}
 
-		#region PropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		private void NotifyPropertyChanged(string str)
-		{
-			if (PropertyChanged != null)
-			{
-				PropertyChanged(this, new PropertyChangedEventArgs(str));
-			}
-		}
-
-		#endregion
+		
 	}
 }

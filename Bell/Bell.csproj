@@ -82,6 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MainViewModel.cs" />
     <Compile Include="Timer.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
