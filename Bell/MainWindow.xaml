@@ -3,9 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Bell" x:Name="Main" x:Class="Bell.MainWindow"
         Title="BellControll" Height="350" Width="525">
+	<Window.DataContext>
+		<local:MainViewModel/>
+	</Window.DataContext>
 
-	
-    <DockPanel LastChildFill="True">
+
+	<DockPanel LastChildFill="True">
         <DockPanel DockPanel.Dock="Top" Background="#FFCCCCCC">
 			<StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
 				<Button Content="Button" Style="{DynamicResource MenuButton}" Width="57" Click="Button_Click"/>
@@ -14,7 +17,7 @@
 			
 			<TextBlock DockPanel.Dock="Right" Text="{Binding TimeText, IsAsync=True, Mode=OneWay}"  HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18.667" TextDecorations="{x:Null}" FontFamily="Arial"/>
 		</DockPanel>
-		<TextBlock DockPanel.Dock="Bottom" Text="{Binding Error, Mode=OneWay}"></TextBlock>
+		<TextBlock DockPanel.Dock="Bottom" Text=""></TextBlock>
         <DockPanel>
             <StackPanel Width="300">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0"><Label Width="110" HorizontalContentAlignment="Center">Начало:</Label><TextBox x:Name="st" Width="150px"></TextBox></StackPanel>
@@ -27,12 +30,12 @@
             <StackPanel >
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Сега: "></TextBlock>
-					<TextBlock Text="{Binding time_type, Mode=OneWay}"></TextBlock>
+					<TextBlock Text=""></TextBlock>
 
 					<TextBlock Text=" Следващ час: "></TextBlock>
-					<TextBlock Text="{Binding next_hour, Mode=OneWay}"></TextBlock>
+					<TextBlock Text=""></TextBlock>
 				</StackPanel>
-				<ListBox x:Name="Clases" Background="{x:Null}" BorderBrush="{x:Null}">
+				<ListBox ItemsSource="{Binding HList}" x:Name="Clases" Background="{x:Null}" BorderBrush="{x:Null}">
 					<ListBox.ItemTemplate>
 						<DataTemplate>
 							<StackPanel>
@@ -40,8 +43,6 @@
 								<StackPanel Orientation="Horizontal">
 									<TextBlock>Начало: </TextBlock>
 									<TextBlock Text="{Binding Start}" Margin="5,0,0,0"/>
-									<TextBlock Margin="10,0,0,0">Край: </TextBlock>
-									<TextBlock Text="{Binding End}" Margin="5,0,0,0"/>
 									
 								</StackPanel>
 							</StackPanel>
