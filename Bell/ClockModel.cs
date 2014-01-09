@@ -12,9 +12,9 @@ using System.Diagnostics;
 namespace Bell
 {
 	enum ClassType { 
-		hour = 0,
-		normalmid = 1,
-		longmid = 2,
+		Час = 0,
+		Междучасие = 1,
+		Голямо_междучасие = 2,
 		shortmid = 3,
 	}
 
@@ -38,11 +38,11 @@ namespace Bell
 			TimeSpan lmid = new TimeSpan(0, ml, 0);
 			List<KeyValuePair<ClassType, TimeSpan>> llist = new List<KeyValuePair<ClassType, TimeSpan>>();
 			int i = 0;
-			ClassType lasttype = ClassType.normalmid;
+			ClassType lasttype = ClassType.Междучасие;
 			while (i < 7 * 2) {
 				switch(lasttype){
-					case ClassType.hour:
-						lasttype = (i == 5)? ClassType.longmid : ClassType.normalmid ;
+					case ClassType.Час:
+						lasttype = (i == 5)? ClassType.Голямо_междучасие : ClassType.Междучасие ;
 						llist.Add(new KeyValuePair<ClassType, TimeSpan>(lasttype, t));
 						if (i == 5) {
 							t += lmid;
@@ -53,8 +53,8 @@ namespace Bell
 						}
 						
 					break;
-					case ClassType.normalmid:
-						lasttype = ClassType.hour;
+					case ClassType.Междучасие:
+						lasttype = ClassType.Час;
 						llist.Add(new KeyValuePair<ClassType, TimeSpan>(lasttype, t));
 						t += hour;
 						
@@ -63,8 +63,8 @@ namespace Bell
 					case ClassType.shortmid:
 
 					break;
-					case ClassType.longmid:
-						lasttype = ClassType.hour;
+					case ClassType.Голямо_междучасие:
+						lasttype = ClassType.Час;
 						llist.Add(new KeyValuePair<ClassType, TimeSpan>(lasttype, t));
 						t += hour;
 						

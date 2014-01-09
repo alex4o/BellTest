@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 
 namespace Bell
 {
@@ -20,13 +21,13 @@ namespace Bell
     /// </summary>
     public partial class MainWindow : Window
     {
+		bool hides = true;
 
-
-		//MainViewModel mvm;
+		MainViewModel mvm;
         public MainWindow()
         {
             InitializeComponent();
-			//mvm = (MainViewModel)this.DataContext;
+			mvm = this.DataContext as MainViewModel;
 
 			
 			//this.DataContext = cm;
@@ -44,7 +45,25 @@ namespace Bell
 
 		private void Button_Click_1(object sender, RoutedEventArgs e)
 		{
+			mvm.genList(Convert.ToInt32(ho.Text), Convert.ToInt32(mo.Text), Convert.ToInt32(mlo.Text));
+		}
 
+		private void Button_Click_2(object sender, RoutedEventArgs e)
+		{
+			DoubleAnimation da = new DoubleAnimation();
+			
+			da.From = CustomEdit.ActualHeight;
+			if (hides)
+			{
+				da.To = 0;
+				hides = !hides;
+			}
+			else { 
+				da.To = 400;
+				hides = !hides;
+			}
+			da.Duration = new Duration(TimeSpan.FromSeconds(1));
+			CustomEdit.BeginAnimation(StackPanel.HeightProperty,da);
 		}
     }
 }

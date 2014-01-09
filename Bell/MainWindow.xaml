@@ -3,6 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Bell" x:Name="Main" x:Class="Bell.MainWindow"
         Title="BellControll" Height="350" Width="525">
+	<Window.Resources>
+		<BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+	</Window.Resources>
 	<Window.DataContext>
 		<local:MainViewModel/>
 	</Window.DataContext>
@@ -17,25 +20,55 @@
 			
 			<TextBlock DockPanel.Dock="Right" Text="{Binding TimeText, IsAsync=True, Mode=OneWay}"  HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18.667" TextDecorations="{x:Null}" FontFamily="Arial"/>
 		</DockPanel>
-		<TextBlock DockPanel.Dock="Bottom" Text=""></TextBlock>
-        <DockPanel>
-            <StackPanel Width="300">
-				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0"><Label Width="110" HorizontalContentAlignment="Center">Начало:</Label><TextBox x:Name="st" Width="150px"></TextBox></StackPanel>
-            	<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0"><Label Width="110" HorizontalContentAlignment="Center">Час:</Label><TextBox x:Name="ho" Width="150px"></TextBox></StackPanel>
-				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0"><Label Width="110" HorizontalContentAlignment="Center">Междучасие:</Label><TextBox x:Name="mo" Width="150px"></TextBox></StackPanel>
-				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0"><Label Width="110" HorizontalContentAlignment="Center">Голямо м/у часие:</Label><TextBox x:Name="mlo" Width="150px"></TextBox></StackPanel>
-				<Button Content="Submit" HorizontalAlignment="Center" Padding="5,1" Width="65" Margin="0,4,0,0" VerticalAlignment="Center" Click="Button_Click_1"/>
+		<TextBlock DockPanel.Dock="Bottom" Text="" Background="#FFCCCCCC"></TextBlock>
+        <DockPanel LastChildFill="True">
+			
+			<StackPanel Width="300">
+				<CheckBox x:Name="hour">Намаляна на часовете</CheckBox>
 
+				<StackPanel  Visibility="{Binding Path=IsChecked , ElementName=hour, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}">
+					<RadioButton Content="5 минути"/>
+					<RadioButton Content="15 минути"/>
+					<RadioButton Content="ръчно"/>
+				</StackPanel>
+
+				<CheckBox x:Name="mid" >Намаляна на междучасията:</CheckBox>
+
+				<StackPanel Visibility="{Binding Path=IsChecked , ElementName=mid, Mode=OneWay, Converter={StaticResource BoolToVisConverter}}">
+					<RadioButton Content="малко: 5 минути, голямо: 15 минути "/>
+					<RadioButton Content="малко: 5 минути, голямо: 10 минути "/>
+					<RadioButton Content="ръчно"/>
+				</StackPanel>
+
+				<Button x:Name="button" Click="Button_Click_2">Expand/Hide</Button>
+				<StackPanel x:Name="CustomEdit" RenderTransformOrigin="0.5,0.5">
+					<StackPanel.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</StackPanel.RenderTransform>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0"><Label Width="110" HorizontalContentAlignment="Center">Начало:</Label><TextBox x:Name="st" Width="150px"></TextBox></StackPanel>
+            	<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0"><Label Width="110" HorizontalContentAlignment="Center">Час:</Label><TextBox x:Name="ho" Width="150px" Text="40"></TextBox></StackPanel>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0"><Label Width="110" HorizontalContentAlignment="Center">Междучасие:</Label><TextBox x:Name="mo" Width="150px" Text="10"></TextBox></StackPanel>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0"><Label Width="110" HorizontalContentAlignment="Center">Голямо м/у часие:</Label><TextBox x:Name="mlo" Width="150px" Text="20"></TextBox></StackPanel>
+				<Button Content="Submit" HorizontalAlignment="Center" Padding="5,1" Width="65" Margin="0,4,0,0" VerticalAlignment="Center" Click="Button_Click_1"/>
+				</StackPanel>
+				
 			</StackPanel>
-            <StackPanel >
-				<StackPanel Orientation="Horizontal">
+			<!--  <StackPanel >
+				
+				 <StackPanel Orientation="Horizontal">
 					<TextBlock Text="Сега: "></TextBlock>
 					<TextBlock Text=""></TextBlock>
 
 					<TextBlock Text=" Следващ час: "></TextBlock>
 					<TextBlock Text=""></TextBlock>
 				</StackPanel>
-				<ListBox ItemsSource="{Binding HList}" x:Name="Clases" Background="{x:Null}" BorderBrush="{x:Null}">
+				-->
+				<ListBox ItemsSource="{Binding HList}" x:Name="Clases" Background="{x:Null}" BorderBrush="{x:Null}" VerticalContentAlignment="Top" HorizontalContentAlignment="Stretch" >
 					<ListBox.ItemTemplate>
 						<DataTemplate>
 							<StackPanel>
@@ -51,7 +84,7 @@
 
 					
 				</ListBox>
-			</StackPanel>
+			<!-- </StackPanel> -->
         </DockPanel>
 		
     </DockPanel>

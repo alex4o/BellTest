@@ -48,6 +48,15 @@ namespace Bell
 			}
 		}
 
+		public void genList(int h, int m, int ml) {
+			chart = cm.LoadList(h,m,ml);
+			hList.Clear();
+			foreach (KeyValuePair<ClassType, TimeSpan> o in chart)
+			{
+				hList.Add(new Hour() { Type = o.Key.ToString(), Start = o.Value.ToString() });
+			}
+		}
+
 		void tick(object sender, EventArgs e)
 		{
 			Now = Now.AddSeconds(1);
