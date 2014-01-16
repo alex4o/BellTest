@@ -14,7 +14,7 @@
 	<DockPanel LastChildFill="True">
         <DockPanel DockPanel.Dock="Top" Background="#FFCCCCCC">
 			<StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-				<Button Content="Button" Style="{DynamicResource MenuButton}" Width="57" Click="Button_Click"/>
+				<Button Content="Отвори задачи" Style="{DynamicResource MenuButton}" Width="57" Click="Button_Click"/>
 				<Button Content="Button" Style="{DynamicResource MenuButton}" Width="57"/>
 			</StackPanel>
 			

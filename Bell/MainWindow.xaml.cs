@@ -36,7 +36,8 @@ namespace Bell
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			
+			Patern p = new Patern(mvm);
+			p.Show();
 			//cm.Error = "sdaasddsa";
 			//this.DataContext = cm;
 
